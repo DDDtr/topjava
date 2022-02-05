@@ -11,28 +11,44 @@
 <hr>
 <h1>Meals</h1>
 
-<table border="1">
-    <th>Date</th>
-    <th>Description</th>
-    <th>Calories</th>
-    <c:forEach var="mealTo" items="${mealList}">
+<a href="add_meal.jsp">Add Meal</a>
+<br><br>
+<style type="text/css">
+    Table {
+        border-collapse: collapse;
+        border: 2px solid black;
+    }
+    TD, TH {
+        padding: 5px;
+        border: 2px solid black;
+    }
+</style>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Calories</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <jsp:useBean id="mealToList" scope="request" type="java.util.List"/>
+    <c:forEach var="mealTo" items="${mealToList}">
         <javatime:format value="${mealTo.dateTime}" style="MS" var="date_time"/>
-        <c:if test="${mealTo.excess}">
-            <tr>
-                <td><font color="red">${date_time}</font></td>
-                <td><font color="red">${mealTo.description}</font></td>
-                <td><font color="red">${mealTo.calories}</font></td>
-                <td><font color="red">${mealTo.excess}</font></td>
-            </tr>
-        </c:if>
-        <c:if test="${!mealTo.excess}">
-            <tr>
-                <td><font color="green">${date_time}</font></td>
-                <td><font color="green">${mealTo.description}</font></td>
-                <td><font color="green">${mealTo.calories}</font></td>
-                <td><font color="green">${mealTo.excess}</font></td>
-            </tr>
-        </c:if>
+
+        <c:choose>
+            <c:when test="${mealTo.excess}"><tr style="color: red"></c:when>
+            <c:when test="${!mealTo.excess}"><tr style="color: green"></c:when>
+        </c:choose>
+
+        <td>${mealTo.id}</td>
+        <td>${date_time}</td>
+        <td>${mealTo.description}</td>
+        <td>${mealTo.calories}</td>
+        <td><a href="${pageContext.request.contextPath}/meals?action=update&id=<c:out value="${mealTo.id}"/> ">Update</a></td>
+        <td><a href="delete.jsp">Delete</a></td>
+
+    </tr>
     </c:forEach>
 </table>
 </body>
