@@ -32,7 +32,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>createMeal</servlet-name>
-        <url-pattern>/create</url-pattern>
+        <url-pattern>/add_meal</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -18,6 +18,7 @@
         border-collapse: collapse;
         border: 2px solid black;
     }
+
     TD, TH {
         padding: 5px;
         border: 2px solid black;
@@ -25,30 +26,21 @@
 </style>
 <table>
     <tr>
-        <th>Id</th>
         <th>Date</th>
         <th>Description</th>
         <th>Calories</th>
         <th></th>
         <th></th>
     </tr>
-    <jsp:useBean id="mealToList" scope="request" type="java.util.List"/>
     <c:forEach var="mealTo" items="${mealToList}">
-        <javatime:format value="${mealTo.dateTime}" style="MS" var="date_time"/>
-
-        <c:choose>
-            <c:when test="${mealTo.excess}"><tr style="color: red"></c:when>
-            <c:when test="${!mealTo.excess}"><tr style="color: green"></c:when>
-        </c:choose>
-
-        <td>${mealTo.id}</td>
-        <td>${date_time}</td>
-        <td>${mealTo.description}</td>
-        <td>${mealTo.calories}</td>
-        <td><a href="${pageContext.request.contextPath}/meals?action=update&id=<c:out value="${mealTo.id}"/> ">Update</a></td>
-        <td><a href="delete.jsp">Delete</a></td>
-
-    </tr>
+        <javatime:format value="${mealTo.dateTime}" pattern="yyyy-MM-dd HH:mm" style="MS" var="date_time"/>
+        <tr style="color:${mealTo.excess ? "red" : "green"}">
+            <td>${date_time}</td>
+            <td>${mealTo.description}</td>
+            <td>${mealTo.calories}</td>
+            <td><a href="${pageContext.request.contextPath}/meals?action=update&id=${mealTo.id}">Update</a></td>
+            <td><a href="${pageContext.request.contextPath}/meals?action=delete&id=${mealTo.id}">Delete</a></td>
+        </tr>
     </c:forEach>
 </table>
 </body>
