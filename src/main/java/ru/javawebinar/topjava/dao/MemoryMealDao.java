@@ -6,14 +6,14 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MemoryMealImpl implements Dao<Meal> {
-    private static MemoryMealImpl instance;
+public class MemoryMealDao implements Dao<Meal> {
+    private static MemoryMealDao instance;
     public List<Meal> meals = MealsUtil.mealList;
     private final AtomicInteger id = new AtomicInteger(meals.size());
 
-    public static MemoryMealImpl getInstance() {
+    public static MemoryMealDao getInstance() {
         if (instance == null) {
-            instance = new MemoryMealImpl();
+            instance = new MemoryMealDao();
         }
         return instance;
     }

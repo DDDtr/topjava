@@ -20,6 +20,7 @@ public class MealTo {
         this.calories = calories;
         this.excess = excess;
     }
+
     public int getId() {
         return id;
     }

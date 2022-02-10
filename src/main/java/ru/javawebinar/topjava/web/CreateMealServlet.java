@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.dao.Dao;
-import ru.javawebinar.topjava.dao.MemoryMealImpl;
+import ru.javawebinar.topjava.dao.MemoryMealDao;
 import ru.javawebinar.topjava.model.Meal;
 
 import javax.servlet.ServletException;
@@ -18,12 +18,13 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class CreateMealServlet extends HttpServlet {
     private static final Logger log = getLogger(CreateMealServlet.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-    private final Dao<Meal> dao = MemoryMealImpl.getInstance();
+    private final Dao<Meal> dao = MemoryMealDao.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("Creating new meal");
 
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         LocalDateTime dateTime = LocalDateTime.parse(request.getParameter("datetime"), DATE_TIME_FORMATTER);
         String description = request.getParameter("description");
