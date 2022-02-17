@@ -17,6 +17,10 @@ public class SpringMain {
             adminUserController.create(new User(null, "userName", "email@mail.ru", "password", Role.ADMIN));
         }
 
+        System.out.println("11");
+        System.out.println("21");
+        System.out.println("31");
+        System.out.println("41");
         System.out.println("1");
         System.out.println("1");
         System.out.println("1");
